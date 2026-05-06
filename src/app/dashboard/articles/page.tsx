@@ -196,7 +196,7 @@ export default function DashboardArticlesPage() {
                   ) : (
                     <>
                       <h2 className="text-lg font-semibold text-foreground">{article.title}</h2>
-                      <p className="text-sm text-muted-foreground">{article.publishedAt} · {article.readTime} min read</p>
+                      <p className="text-sm text-muted-foreground">{article.readTime} min read</p>
                     </>
                   )}
                 </div>
