@@ -147,26 +147,92 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
         ) : null}
 
         {layoutKey === 'article-editorial' || layoutKey === 'article-journal' ? (
-          <section className="mb-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div>
-              <p className={`text-xs uppercase tracking-[0.3em] ${ui.muted}`}>{taskConfig?.label || task}</p>
-              <h1 className="mt-3 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-foreground">{taskConfig?.description || 'Latest posts'}</h1>
-              <p className={`mt-5 max-w-2xl text-sm leading-8 ${ui.muted}`}>This reading surface uses slower pacing, stronger typographic hierarchy, and more breathing room so long-form content feels intentional rather than squeezed into a generic feed.</p>
-            </div>
-            <div className={`rounded-[2rem] p-6 ${ui.panel}`}>
-              <p className={`text-xs font-semibold uppercase tracking-[0.24em] ${ui.muted}`}>Reading note</p>
-              <p className={`mt-4 text-sm leading-7 ${ui.muted}`}>Use category filters to jump between topics without collapsing the page into the same repeated card rhythm used by other task types.</p>
-              <form className="mt-5 flex items-center gap-3" action={taskConfig?.route || '#'}>
-                <select name="category" defaultValue={normalizedCategory} className={`h-11 flex-1 rounded-xl px-3 text-sm ${ui.input}`}>
-                  <option value="all">All categories</option>
-                  {CATEGORY_OPTIONS.map((item) => (
-                    <option key={item.slug} value={item.slug}>{item.name}</option>
-                  ))}
-                </select>
-                <button type="submit" className={`h-11 rounded-xl px-4 text-sm font-medium ${ui.button}`}>Apply</button>
-              </form>
+          <section className="mb-12 relative overflow-hidden">
+            {/* Unique decorative background with multiple layers */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-100 rounded-[3rem] opacity-60 transform rotate-1"></div>
+            <div className="absolute inset-0 bg-gradient-to-tl from-blue-100 via-indigo-50 to-teal-100 rounded-[3rem] opacity-40 transform -rotate-1"></div>
+            
+            {/* Floating decorative shapes */}
+            <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-300 rounded-full opacity-30 animate-bounce blur-xl"></div>
+            <div className="absolute top-20 right-20 w-16 h-16 bg-pink-300 rounded-full opacity-30 animate-pulse delay-300 blur-xl"></div>
+            <div className="absolute bottom-10 left-1/4 w-24 h-24 bg-purple-300 rounded-full opacity-30 animate-bounce delay-75 blur-xl"></div>
+            <div className="absolute bottom-20 right-1/3 w-12 h-12 bg-blue-300 rounded-full opacity-30 animate-pulse delay-500 blur-xl"></div>
+            
+            {/* Decorative border pattern */}
+            <div className="absolute inset-4 border-4 border-dashed border-purple-200 rounded-[2.5rem] opacity-50"></div>
+            <div className="absolute inset-6 border-2 border-dotted border-pink-200 rounded-[2.5rem] opacity-50"></div>
+            
+            <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+              <div className={`p-8 rounded-[2.5rem] ${ui.panel} backdrop-blur-sm border-2 border-dashed border-purple-300 shadow-2xl transform hover:scale-105 transition-all duration-500 relative overflow-hidden`}>
+                {/* Inner decorative pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-yellow-200/50 to-transparent rounded-bl-full"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-pink-200/50 to-transparent rounded-tr-full"></div>
+                
+                <div className="relative">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse shadow-lg shadow-yellow-400/50"></div>
+                    <div className="w-4 h-4 bg-pink-400 rounded-full animate-pulse delay-75 shadow-lg shadow-pink-400/50"></div>
+                    <div className="w-4 h-4 bg-purple-400 rounded-full animate-pulse delay-150 shadow-lg shadow-purple-400/50"></div>
+                    <p className={`text-xs uppercase tracking-[0.3em] ${ui.muted} ml-4`}>{taskConfig?.label || task}</p>
+                  </div>
+                  <h1 className="max-w-4xl text-6xl lg:text-7xl font-bold leading-tight mb-6 transform hover:scale-105 transition-transform duration-300" style={{ color: '#fff7ef', textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
+                    {taskConfig?.description || 'Creative Articles'}
+                  </h1>
+                  <p className={`text-lg leading-relaxed ${ui.muted} mb-8 font-medium`}>
+                    ✨ Welcome to your creative writing space! This unique article hub features handcrafted designs, playful animations, and a vibrant color palette that makes reading and writing feel like an artistic adventure.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <div className={`px-6 py-3 rounded-full ${ui.button} text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`}>
+                      <span className="relative z-10">🎨 Start Creating</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700"></div>
+                    </div>
+                    <div className={`px-6 py-3 rounded-full ${ui.soft} font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`}>
+                      <span className="relative z-10">📚 Browse Stories</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700 delay-100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className={`p-6 rounded-[2rem] ${ui.panel} backdrop-blur-sm border-2 border-dotted border-pink-300 shadow-xl transform hover:scale-105 transition-all duration-500 hover:rotate-1 relative overflow-hidden`}>
+                {/* Inner decorative elements */}
+                <div className="absolute top-2 right-2 w-8 h-8 bg-gradient-to-bl from-pink-200/60 to-transparent rounded-full animate-pulse"></div>
+                <div className="absolute bottom-2 left-2 w-6 h-6 bg-gradient-to-tr from-purple-200/60 to-transparent rounded-full animate-pulse delay-200"></div>
+                
+                <div className="relative">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-2xl animate-bounce">🎭</span>
+                    <p className={`text-xs font-bold uppercase tracking-[0.24em] ${ui.muted}`}>Creative Hub</p>
+                  </div>
+                  <p className={`text-sm leading-7 ${ui.muted} mb-6 font-medium`}>
+                    🌟 Filter articles by category to explore different creative worlds. Each category has its own unique flavor and style!
+                  </p>
+                  <form className="space-y-4" action={taskConfig?.route || '#'}>
+                    <select name="category" defaultValue={normalizedCategory} className={`h-12 w-full rounded-2xl px-4 text-sm font-bold ${ui.input} border-2 border-dashed border-purple-300 focus:border-pink-400 transition-colors focus:ring-4 focus:ring-pink-200`}>
+                      <option value="all">🎨 All Creative Categories</option>
+                      {CATEGORY_OPTIONS.map((item) => (
+                        <option key={item.slug} value={item.slug}>✨ {item.name}</option>
+                      ))}
+                  </select>
+                  <button type="submit" className={`h-12 w-full rounded-2xl font-bold ${ui.button} text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300`}>
+                    🪄 Apply Magic Filter
+                  </button>
+                </form>
+                
+                <div className="mt-6 grid grid-cols-3 gap-2">
+                  <div className="aspect-square bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-xl animate-pulse shadow-lg shadow-yellow-200/50"></div>
+                  <div className="aspect-square bg-gradient-to-br from-pink-200 to-pink-400 rounded-xl animate-pulse delay-75 shadow-lg shadow-pink-200/50"></div>
+                  <div className="aspect-square bg-gradient-to-br from-purple-200 to-purple-400 rounded-xl animate-pulse delay-150 shadow-lg shadow-purple-200/50"></div>
+                </div>
+                </div>
+              </div>
             </div>
           </section>
+        ) : null}
+
+        {/* Unique decorative elements for article cards */}
+        {layoutKey === 'article-editorial' || layoutKey === 'article-journal' ? (
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent opacity-50"></div>
         ) : null}
 
         {layoutKey === 'image-masonry' || layoutKey === 'image-portfolio' ? (

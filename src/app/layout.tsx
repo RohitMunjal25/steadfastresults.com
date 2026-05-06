@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { AuthProvider } from '@/lib/auth-context'
 import { buildSiteMetadata } from '@/lib/seo'
 import { getFactoryState } from '@/design/factory/get-factory-state'
+import { dynaPuff, manrope, fraunces } from '@/lib/fonts'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildSiteMetadata()
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         data-site-shell={recipe.homeLayout}
         data-motion-pack={recipe.motionPack}
-        className={`${brandPack.bodyClassName} ${brandPack.fontClassName} ${brandPack.paletteClassName}`}
+        className={`${brandPack.bodyClassName} ${brandPack.fontClassName} ${brandPack.paletteClassName} ${dynaPuff.variable} ${manrope.variable} ${fraunces.variable}`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <AuthProvider>

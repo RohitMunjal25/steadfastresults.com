@@ -75,13 +75,6 @@ export function FeaturedArticles() {
                 <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground" suppressHydrationWarning>
                   <span>{hero.author.name}</span>
                   <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />
-                  <span>
-                    {new Date(hero.publishedAt).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </span>
-                  <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />
                   <span>{hero.readTime} min read</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
@@ -149,12 +142,6 @@ export function FeaturedArticles() {
                   <p className="line-clamp-2 text-sm text-muted-foreground">
                     {article!.excerpt}
                   </p>
-                  <div className="text-xs text-muted-foreground" suppressHydrationWarning>
-                    {new Date(article!.publishedAt).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </div>
                 </div>
               </Link>
             ))}
@@ -171,14 +158,8 @@ export function FeaturedArticles() {
                 'hover:border-muted-foreground/30'
               )}
             >
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
                 <Badge variant="outline">{article.category}</Badge>
-                <span className="text-xs text-muted-foreground" suppressHydrationWarning>
-                  {new Date(article.publishedAt).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </span>
               </div>
               <h4 className="mt-3 text-base font-semibold text-foreground">
                 {article.title}
