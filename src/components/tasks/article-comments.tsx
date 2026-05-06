@@ -244,123 +244,255 @@ export function ArticleComments({ slug }: { slug: string }) {
   };
 
   return (
-    <section className="mt-12" id="comments">
-      <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
-        <MessageSquare className="h-4 w-4" />
-        Comments
+    <section className="mt-12 relative" id="comments">
+      {/* Creative decorative background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-100 rounded-[3rem] opacity-40 transform -rotate-1"></div>
+      <div className="absolute inset-0 bg-gradient-to-tl from-blue-100 via-indigo-50 to-teal-100 rounded-[3rem] opacity-30 transform rotate-1"></div>
+      
+      <div className="relative">
+        {/* Fun header with animations */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="flex gap-2">
+            <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+            <div className="w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-75"></div>
+            <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+          </div>
+          <div className="flex items-center gap-2">
+            <MessageSquare className="h-6 w-6 text-purple-600 animate-bounce" />
+            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-600">
+              Creative Comments Hub
+            </h2>
+            <span className="text-2xl">💬</span>
+          </div>
+          <div className="flex gap-2">
+            <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300"></div>
+            <div className="w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-500"></div>
+            <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse delay-700"></div>
+          </div>
+        </div>
+
+        {/* Creative comment form */}
+        <form onSubmit={handleSubmit} className="relative">
+          <div className="rounded-[2.5rem] border-2 border-dashed border-purple-300 bg-gradient-to-br from-pink-50 via-purple-50 to-yellow-50 p-6 shadow-2xl backdrop-blur-sm transform hover:scale-105 transition-all duration-500 hover:rotate-1">
+            {/* Fun form header */}
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-2xl">✨</span>
+              <label htmlFor="comment-body" className="text-lg font-bold text-purple-800">
+                Share Your Creative Thoughts!
+              </label>
+              <span className="text-2xl">🎨</span>
+            </div>
+            
+            <Textarea
+              id="comment-body"
+              value={commentBody}
+              onChange={(event) => setCommentBody(event.target.value)}
+              placeholder="🌟 Let your creativity shine! What do you think about this article?"
+              className="min-h-32 rounded-2xl border-2 border-dotted border-pink-300 bg-white/80 backdrop-blur-sm text-purple-900 placeholder-purple-400 font-medium focus:border-purple-400 focus:ring-4 focus:ring-purple-200 transition-all duration-300"
+              maxLength={2000}
+              disabled={limitReached}
+            />
+            
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+              <div className="space-y-2">
+                <div
+                  className={`inline-flex rounded-full px-4 py-2 text-sm font-bold border-2 ${
+                    limitReached
+                      ? "bg-red-100 text-red-700 border-red-300 animate-pulse"
+                      : remainingToday <= 3
+                        ? "bg-amber-100 text-amber-700 border-amber-300 animate-bounce"
+                        : "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                  }`}
+                >
+                  {limitReached ? (
+                    <span>🚀 Daily limit reached! {DAILY_COMMENT_LIMIT}/{DAILY_COMMENT_LIMIT}</span>
+                  ) : (
+                    <span>✨ {remainingToday} creative comments left today!</span>
+                  )}
+                </div>
+                <p className="text-xs text-purple-600 font-medium">
+                  {limitReached ? (
+                    <span>🕐 Come back after {resetLabel} for more creative fun!</span>
+                  ) : (
+                    <span>🔄 Your creative energy resets at {resetLabel}</span>
+                  )}
+                </p>
+              </div>
+              <Button 
+                type="submit" 
+                disabled={limitReached}
+                className="rounded-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span className="mr-2">🪄</span>
+                Publish Creative Comment
+              </Button>
+            </div>
+            {formError ? (
+              <div className="mt-4 p-3 rounded-2xl bg-red-100 border-2 border-red-300 text-red-700 font-medium animate-pulse">
+                <span className="mr-2">⚠️</span>
+                {formError}
+              </div>
+            ) : null}
+          </div>
+        </form>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-6 rounded-2xl border border-border bg-white p-5 shadow-sm">
-        <div className="space-y-2">
-          <label htmlFor="comment-body" className="text-sm font-medium text-foreground">
-            Add a comment
-          </label>
-          <Textarea
-            id="comment-body"
-            value={commentBody}
-            onChange={(event) => setCommentBody(event.target.value)}
-            placeholder="Write your comment here"
-            className="min-h-28"
-            maxLength={2000}
-            disabled={limitReached}
-          />
-        </div>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <div className="space-y-1">
-            <div
-              className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                limitReached
-                  ? "bg-destructive/10 text-destructive"
-                  : remainingToday <= 3
-                    ? "bg-amber-100 text-amber-700"
-                    : "bg-primary/10 text-primary"
-              }`}
-            >
-              {limitReached
-                ? `Daily limit reached: ${DAILY_COMMENT_LIMIT}/${DAILY_COMMENT_LIMIT}`
-                : `${remainingToday} of ${DAILY_COMMENT_LIMIT} comments left today`}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              {limitReached
-                ? `You can publish again after ${resetLabel}.`
-                : `Limit resets after ${resetLabel}.`}
-            </p>
-          </div>
-          <Button type="submit" disabled={limitReached}>
-            Publish Comment
-          </Button>
-        </div>
-        {formError ? <p className="mt-3 text-sm text-destructive">{formError}</p> : null}
-      </form>
-
       {mergedComments.length ? (
-        <div className="mt-6 space-y-4">
-          {visibleComments.map((comment) => {
+        <div className="mt-8 space-y-6">
+          {visibleComments.map((comment, index) => {
             const isHighlighted = highlightId === comment.id;
             return (
               <div
                 key={comment.id}
                 id={`comment-${comment.id}`}
-                className={`rounded-2xl border p-4 ${
-                  isHighlighted ? "border-primary/50 bg-primary/5" : "border-border bg-white"
+                className={`relative transform transition-all duration-500 hover:scale-105 hover:-translate-y-1 ${
+                  isHighlighted ? "scale-105 -translate-y-2" : ""
                 }`}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{comment.authorName}</p>
+                {/* Creative comment card */}
+                <div className={`rounded-[2rem] border-2 p-6 backdrop-blur-sm shadow-xl ${
+                  isHighlighted 
+                    ? "border-purple-400 bg-gradient-to-br from-purple-100 to-pink-100 animate-pulse" 
+                    : comment.source === "local" 
+                      ? "border-pink-300 bg-gradient-to-br from-pink-50 to-yellow-50 hover:border-purple-400"
+                      : "border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 hover:border-pink-400"
+                }`}>
+                  {/* Comment header with creative elements */}
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                        {comment.authorName.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="text-lg font-bold text-purple-900">{comment.authorName}</p>
+                        <div className="flex items-center gap-2">
+                          {comment.source === "local" ? (
+                            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full">
+                              <span>🌟</span>
+                              Creative Author
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full">
+                              <span>💫</span>
+                              Guest Comment
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {comment.source === "local" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteLocalComment(comment.id)}
+                          className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-red-300 text-red-500 transition hover:bg-red-100 hover:scale-110 hover:rotate-12"
+                          aria-label="Delete local comment"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      ) : null}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(comment.createdAt).toLocaleDateString()}
-                    </p>
-                    {comment.source === "local" ? (
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteLocalComment(comment.id)}
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition hover:border-destructive/30 hover:bg-destructive/5 hover:text-destructive"
-                        aria-label="Delete local comment"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    ) : null}
+                  
+                  {/* Comment content with creative styling */}
+                  <div className="relative">
+                    <div className="absolute -top-2 -left-2 text-2xl opacity-20">💬</div>
+                    <RichContent
+                      html={formatRichHtml(comment.body, "Comment added.")}
+                      className="text-purple-800 font-medium leading-relaxed prose prose-p:text-purple-700 prose-p:font-medium prose-strong:text-purple-900 prose-em:text-purple-600"
+                    />
+                    <div className="absolute -bottom-2 -right-2 text-2xl opacity-20">✨</div>
                   </div>
                 </div>
-                <RichContent
-                  html={formatRichHtml(comment.body, "Comment added.")}
-                  className="mt-2 text-sm text-muted-foreground prose-sm prose-h2:text-xl prose-h3:text-lg"
-                />
+                
+                {/* Decorative elements */}
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-75"></div>
               </div>
             );
           })}
         </div>
       ) : (
-        <div className="mt-6 rounded-2xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-          No comments yet.
+        <div className="mt-8 relative">
+          <div className="rounded-[2.5rem] border-2 border-dashed border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 p-8 text-center backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-4">
+              <div className="text-6xl animate-bounce">💭</div>
+              <div className="space-y-2">
+                <p className="text-xl font-bold text-purple-800">No Creative Comments Yet!</p>
+                <p className="text-purple-600 font-medium">Be the first to share your amazing thoughts! 🌟</p>
+              </div>
+              <div className="flex gap-2 mt-4">
+                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse delay-75"></div>
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
       {totalPages > 1 ? (
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-          <span>
-            Page {safePage} of {totalPages}
-          </span>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              disabled={safePage === 1}
-              className="rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={safePage === totalPages}
-              className="rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Next
-            </button>
+        <div className="mt-8 relative">
+          <div className="rounded-[2rem] border-2 border-dashed border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 p-6 backdrop-blur-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📖</span>
+                <div className="text-lg font-bold text-purple-800">
+                  Reading Page <span className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{safePage}</span> of <span className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-yellow-600">{totalPages}</span>
+                </div>
+                <span className="text-2xl">📚</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={safePage === 1}
+                  className="group relative rounded-full border-2 border-purple-400 bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-110 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:-translate-y-0"
+                >
+                  <span className="flex items-center gap-2">
+                    <span>←</span>
+                    <span>Previous</span>
+                    <span className="text-lg">📖</span>
+                  </span>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <div className="flex gap-2">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse delay-75"></div>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={safePage === totalPages}
+                  className="group relative rounded-full border-2 border-pink-400 bg-gradient-to-r from-pink-500 to-yellow-500 px-4 py-2 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-110 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:-translate-y-0"
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="text-lg">📚</span>
+                    <span>Next</span>
+                    <span>→</span>
+                  </span>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              </div>
+            </div>
+            
+            {/* Page indicators */}
+            <div className="mt-4 flex justify-center gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <button
+                  key={pageNum}
+                  type="button"
+                  onClick={() => setPage(pageNum)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    pageNum === safePage
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 scale-125 shadow-lg"
+                      : "bg-purple-200 hover:bg-purple-300 hover:scale-110"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       ) : null}
