@@ -245,39 +245,38 @@ export function ArticleComments({ slug }: { slug: string }) {
 
   return (
     <section className="mt-12 relative" id="comments">
-      {/* Creative decorative background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-100 rounded-[3rem] opacity-40 transform -rotate-1"></div>
-      <div className="absolute inset-0 bg-gradient-to-tl from-blue-100 via-indigo-50 to-teal-100 rounded-[3rem] opacity-30 transform rotate-1"></div>
+      <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-[#fcfaf6] via-[#f8f3ea] to-[#f2eadd] opacity-90"></div>
+      <div className="absolute inset-0 rounded-[3rem] border border-[#e7dfd2] opacity-70"></div>
       
       <div className="relative">
         {/* Fun header with animations */}
         <div className="flex items-center gap-3 mb-8">
           <div className="flex gap-2">
-            <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
-            <div className="w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-75"></div>
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+            <div className="w-3 h-3 bg-[#d4b25c] rounded-full animate-pulse"></div>
+            <div className="w-3 h-3 bg-[#b98970] rounded-full animate-pulse delay-75"></div>
+            <div className="w-3 h-3 bg-[#8f1f3f] rounded-full animate-pulse delay-150"></div>
           </div>
           <div className="flex items-center gap-2">
-            <MessageSquare className="h-6 w-6 text-purple-600 animate-bounce" />
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-600">
+            <MessageSquare className="h-6 w-6 text-[#8f1f3f]" />
+            <h2 className="text-3xl font-bold text-[#2f241d]">
               Creative Comments Hub
             </h2>
             <span className="text-2xl">💬</span>
           </div>
           <div className="flex gap-2">
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300"></div>
-            <div className="w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-500"></div>
-            <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse delay-700"></div>
+            <div className="w-3 h-3 bg-[#8f1f3f] rounded-full animate-pulse delay-300"></div>
+            <div className="w-3 h-3 bg-[#b98970] rounded-full animate-pulse delay-500"></div>
+            <div className="w-3 h-3 bg-[#d4b25c] rounded-full animate-pulse delay-700"></div>
           </div>
         </div>
 
         {/* Creative comment form */}
         <form onSubmit={handleSubmit} className="relative">
-          <div className="rounded-[2.5rem] border-2 border-dashed border-purple-300 bg-gradient-to-br from-pink-50 via-purple-50 to-yellow-50 p-6 shadow-2xl backdrop-blur-sm transform hover:scale-105 transition-all duration-500 hover:rotate-1">
+          <div className="rounded-[2.5rem] border-2 border-dashed border-[#dccfbd] bg-[#fcfaf6] p-6 shadow-[0_12px_35px_rgba(82,56,37,0.08)] backdrop-blur-sm transition-all duration-300">
             {/* Fun form header */}
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">✨</span>
-              <label htmlFor="comment-body" className="text-lg font-bold text-purple-800">
+              <label htmlFor="comment-body" className="text-lg font-bold text-[#3f3127]">
                 Share Your Creative Thoughts!
               </label>
               <span className="text-2xl">🎨</span>
@@ -288,7 +287,7 @@ export function ArticleComments({ slug }: { slug: string }) {
               value={commentBody}
               onChange={(event) => setCommentBody(event.target.value)}
               placeholder="🌟 Let your creativity shine! What do you think about this article?"
-              className="min-h-32 rounded-2xl border-2 border-dotted border-pink-300 bg-white/80 backdrop-blur-sm text-purple-900 placeholder-purple-400 font-medium focus:border-purple-400 focus:ring-4 focus:ring-purple-200 transition-all duration-300"
+              className="min-h-32 rounded-2xl border-2 border-dotted border-[#d9cdbd] bg-[#fffdf9] text-[#3f3127] placeholder-[#8f7564] font-medium focus:border-[#b98970] focus:ring-4 focus:ring-[#eadfce] transition-all duration-300"
               maxLength={2000}
               disabled={limitReached}
             />
@@ -301,7 +300,7 @@ export function ArticleComments({ slug }: { slug: string }) {
                       ? "bg-red-100 text-red-700 border-red-300 animate-pulse"
                       : remainingToday <= 3
                         ? "bg-amber-100 text-amber-700 border-amber-300 animate-bounce"
-                        : "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                        : "bg-[#8f1f3f] text-[#fff6ef] border-[#7b1b36] shadow-lg"
                   }`}
                 >
                   {limitReached ? (
@@ -310,7 +309,7 @@ export function ArticleComments({ slug }: { slug: string }) {
                     <span>✨ {remainingToday} creative comments left today!</span>
                   )}
                 </div>
-                <p className="text-xs text-purple-600 font-medium">
+                <p className="text-xs text-[#6f5648] font-medium">
                   {limitReached ? (
                     <span>🕐 Come back after {resetLabel} for more creative fun!</span>
                   ) : (
@@ -321,7 +320,7 @@ export function ArticleComments({ slug }: { slug: string }) {
               <Button 
                 type="submit" 
                 disabled={limitReached}
-                className="rounded-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="rounded-full px-6 py-3 bg-[#8f1f3f] text-[#fff6ef] font-bold shadow-lg hover:bg-[#7b1b36] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="mr-2">🪄</span>
                 Publish Creative Comment
@@ -353,27 +352,27 @@ export function ArticleComments({ slug }: { slug: string }) {
                 {/* Creative comment card */}
                 <div className={`rounded-[2rem] border-2 p-6 backdrop-blur-sm shadow-xl ${
                   isHighlighted 
-                    ? "border-purple-400 bg-gradient-to-br from-purple-100 to-pink-100 animate-pulse" 
+                    ? "border-[#b98970] bg-[#f7efe3]" 
                     : comment.source === "local" 
-                      ? "border-pink-300 bg-gradient-to-br from-pink-50 to-yellow-50 hover:border-purple-400"
-                      : "border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 hover:border-pink-400"
+                      ? "border-[#dccfbd] bg-[#fcfaf6] hover:border-[#b98970]"
+                      : "border-[#e3d8cb] bg-[#f8f3ea] hover:border-[#b98970]"
                 }`}>
                   {/* Comment header with creative elements */}
                   <div className="flex items-center justify-between gap-3 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                      <div className="w-10 h-10 rounded-full bg-[#8f1f3f] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                         {comment.authorName.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <p className="text-lg font-bold text-purple-900">{comment.authorName}</p>
+                        <p className="text-lg font-bold text-[#2f241d]">{comment.authorName}</p>
                         <div className="flex items-center gap-2">
                           {comment.source === "local" ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full">
+                            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-[#8f1f3f] text-[#fff6ef] rounded-full">
                               <span>🌟</span>
                               Creative Author
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full">
+                            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-[#6f5648] text-[#fff6ef] rounded-full">
                               <span>💫</span>
                               Guest Comment
                             </span>
@@ -400,32 +399,32 @@ export function ArticleComments({ slug }: { slug: string }) {
                     <div className="absolute -top-2 -left-2 text-2xl opacity-20">💬</div>
                     <RichContent
                       html={formatRichHtml(comment.body, "Comment added.")}
-                      className="text-purple-800 font-medium leading-relaxed prose prose-p:text-purple-700 prose-p:font-medium prose-strong:text-purple-900 prose-em:text-purple-600"
+                      className="text-[#3f3127] font-medium leading-relaxed prose prose-p:text-[#4d3d31] prose-p:font-medium prose-strong:text-[#2f241d] prose-em:text-[#6f5648]"
                     />
                     <div className="absolute -bottom-2 -right-2 text-2xl opacity-20">✨</div>
                   </div>
                 </div>
                 
                 {/* Decorative elements */}
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
-                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-75"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#d4b25c] rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-[#b98970] rounded-full animate-pulse delay-75"></div>
               </div>
             );
           })}
         </div>
       ) : (
         <div className="mt-8 relative">
-          <div className="rounded-[2.5rem] border-2 border-dashed border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 p-8 text-center backdrop-blur-sm">
+          <div className="rounded-[2.5rem] border-2 border-dashed border-[#dccfbd] bg-[#fcfaf6] p-8 text-center backdrop-blur-sm">
             <div className="flex flex-col items-center gap-4">
               <div className="text-6xl animate-bounce">💭</div>
               <div className="space-y-2">
-                <p className="text-xl font-bold text-purple-800">No Creative Comments Yet!</p>
-                <p className="text-purple-600 font-medium">Be the first to share your amazing thoughts! 🌟</p>
+                <p className="text-xl font-bold text-[#2f241d]">No Creative Comments Yet!</p>
+                <p className="text-[#6f5648] font-medium">Be the first to share your amazing thoughts! 🌟</p>
               </div>
               <div className="flex gap-2 mt-4">
-                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse delay-75"></div>
-                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+                <div className="w-2 h-2 bg-[#d4b25c] rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-[#b98970] rounded-full animate-pulse delay-75"></div>
+                <div className="w-2 h-2 bg-[#8f1f3f] rounded-full animate-pulse delay-150"></div>
               </div>
             </div>
           </div>
@@ -434,12 +433,12 @@ export function ArticleComments({ slug }: { slug: string }) {
 
       {totalPages > 1 ? (
         <div className="mt-8 relative">
-          <div className="rounded-[2rem] border-2 border-dashed border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 p-6 backdrop-blur-sm">
+          <div className="rounded-[2rem] border-2 border-dashed border-[#dccfbd] bg-[#fcfaf6] p-6 backdrop-blur-sm">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">📖</span>
-                <div className="text-lg font-bold text-purple-800">
-                  Reading Page <span className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{safePage}</span> of <span className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-yellow-600">{totalPages}</span>
+                <div className="text-lg font-bold text-[#2f241d]">
+                  Reading Page <span className="text-2xl text-[#8f1f3f]">{safePage}</span> of <span className="text-2xl text-[#b98970]">{totalPages}</span>
                 </div>
                 <span className="text-2xl">📚</span>
               </div>
@@ -448,32 +447,32 @@ export function ArticleComments({ slug }: { slug: string }) {
                   type="button"
                   onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                   disabled={safePage === 1}
-                  className="group relative rounded-full border-2 border-purple-400 bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-110 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:-translate-y-0"
+                  className="group relative rounded-full border-2 border-[#7b1b36] bg-[#8f1f3f] px-4 py-2 text-sm font-bold text-[#fff6ef] shadow-lg transition-all duration-300 hover:scale-110 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:-translate-y-0"
                 >
                   <span className="flex items-center gap-2">
                     <span>←</span>
                     <span>Previous</span>
                     <span className="text-lg">📖</span>
                   </span>
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 rounded-full bg-[#7b1b36] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
                 <div className="flex gap-2">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse delay-75"></div>
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+                  <div className="w-2 h-2 bg-[#d4b25c] rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-[#b98970] rounded-full animate-pulse delay-75"></div>
+                  <div className="w-2 h-2 bg-[#8f1f3f] rounded-full animate-pulse delay-150"></div>
                 </div>
                 <button
                   type="button"
                   onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
                   disabled={safePage === totalPages}
-                  className="group relative rounded-full border-2 border-pink-400 bg-gradient-to-r from-pink-500 to-yellow-500 px-4 py-2 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-110 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:-translate-y-0"
+                  className="group relative rounded-full border-2 border-[#9b775b] bg-[#b98970] px-4 py-2 text-sm font-bold text-[#fff6ef] shadow-lg transition-all duration-300 hover:scale-110 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:-translate-y-0"
                 >
                   <span className="flex items-center gap-2">
                     <span className="text-lg">📚</span>
                     <span>Next</span>
                     <span>→</span>
                   </span>
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 rounded-full bg-[#9b775b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </div>
             </div>
@@ -487,8 +486,8 @@ export function ArticleComments({ slug }: { slug: string }) {
                   onClick={() => setPage(pageNum)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     pageNum === safePage
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500 scale-125 shadow-lg"
-                      : "bg-purple-200 hover:bg-purple-300 hover:scale-110"
+                      ? "bg-[#8f1f3f] scale-125 shadow-lg"
+                      : "bg-[#ddcfbf] hover:bg-[#cdb9a3] hover:scale-110"
                   }`}
                 />
               ))}

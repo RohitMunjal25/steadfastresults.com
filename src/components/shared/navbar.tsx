@@ -34,7 +34,7 @@ const taskIcons: Record<TaskKey, any> = {
 const variantClasses = {
   'compact-bar': {
     shell: 'border-b border-slate-200/80 bg-white/88 text-slate-950 backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-white shadow-sm',
+    logo: '',
     active: 'bg-slate-950 text-white',
     idle: 'text-slate-600 hover:bg-slate-100 hover:text-slate-950',
     cta: 'rounded-full bg-slate-950 text-white hover:bg-slate-800',
@@ -42,7 +42,7 @@ const variantClasses = {
   },
   'editorial-bar': {
     shell: 'border-b border-[#d7c4b3] bg-[#fff7ee]/90 text-[#2f1d16] backdrop-blur-xl',
-    logo: 'rounded-full border border-[#dbc6b6] bg-white shadow-sm',
+    logo: '',
     active: 'bg-[#2f1d16] text-[#fff4e4]',
     idle: 'text-[#72594a] hover:bg-[#f2e5d4] hover:text-[#2f1d16]',
     cta: 'rounded-full bg-[#2f1d16] text-[#fff4e4] hover:bg-[#452920]',
@@ -50,7 +50,7 @@ const variantClasses = {
   },
   'floating-bar': {
     shell: 'border-b border-transparent bg-transparent text-white',
-    logo: 'rounded-[1.35rem] border border-white/12 bg-white/8 shadow-[0_16px_48px_rgba(15,23,42,0.22)] backdrop-blur',
+    logo: '',
     active: 'bg-[#8df0c8] text-[#07111f]',
     idle: 'text-slate-200 hover:bg-white/10 hover:text-white',
     cta: 'rounded-full bg-[#8df0c8] text-[#07111f] hover:bg-[#77dfb8]',
@@ -58,7 +58,7 @@ const variantClasses = {
   },
   'utility-bar': {
     shell: 'border-b border-[#d7deca] bg-[#f4f6ef]/94 text-[#1f2617] backdrop-blur-xl',
-    logo: 'rounded-xl border border-[#d7deca] bg-white shadow-sm',
+    logo: '',
     active: 'bg-[#1f2617] text-[#edf5dc]',
     idle: 'text-[#56604b] hover:bg-[#e7edd9] hover:text-[#1f2617]',
     cta: 'rounded-lg bg-[#1f2617] text-[#edf5dc] hover:bg-[#2f3a24]',
@@ -69,7 +69,7 @@ const variantClasses = {
 const directoryPalette = {
   'directory-clean': {
     shell: 'border-b border-slate-200 bg-white/94 text-slate-950 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-slate-50',
+    logo: '',
     nav: 'text-slate-600 hover:text-slate-950',
     search: 'border border-slate-200 bg-slate-50 text-slate-600',
     cta: 'bg-slate-950 text-white hover:bg-slate-800',
@@ -78,7 +78,7 @@ const directoryPalette = {
   },
   'market-utility': {
     shell: 'border-b border-[#d7deca] bg-[#f4f6ef]/96 text-[#1f2617] shadow-[0_1px_0_rgba(64,76,34,0.06)] backdrop-blur-xl',
-    logo: 'rounded-xl border border-[#d7deca] bg-white',
+    logo: '',
     nav: 'text-[#56604b] hover:text-[#1f2617]',
     search: 'border border-[#d7deca] bg-white text-[#56604b]',
     cta: 'bg-[#1f2617] text-[#edf5dc] hover:bg-[#2f3a24]',
@@ -116,7 +116,7 @@ export function Navbar() {
           <div className="flex min-w-0 items-center gap-4">
             <Link href="/" className="flex shrink-0 items-center gap-3">
               <div className={cn('flex h-12 w-12 items-center justify-center overflow-hidden p-1.5', palette.logo)}>
-                <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+                <img src="/favicon.png?v=20260516" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
               </div>
               <div className="min-w-0 hidden sm:block">
                 <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
@@ -211,7 +211,7 @@ export function Navbar() {
         <div className="flex min-w-0 flex-1 items-center gap-4 lg:gap-7">
           <Link href="/" className="flex shrink-0 items-center gap-3 whitespace-nowrap pr-2">
             <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden p-1.5', style.logo)}>
-              <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+              <img src="/favicon.png?v=20260516" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 hidden sm:block">
               <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>

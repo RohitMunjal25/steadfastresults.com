@@ -5,61 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SITE_CONFIG } from "@/lib/site-config";
 
-const roles = [
-  { title: "Product Designer", location: "Remote", type: "Full-time", level: "Mid" },
-  { title: "Frontend Engineer", location: "New York, NY", type: "Full-time", level: "Senior" },
-  { title: "Community Lead", location: "Remote", type: "Part-time", level: "Mid" },
-];
-
-const benefits = [
-  "Flexible schedules and remote-first culture",
-  "Health, dental, and vision coverage",
-  "Annual learning stipend",
-  "Quarterly offsites and team retreats",
-];
-
 export default function CareersPage() {
   return (
     <PageShell
       title="Careers"
-      description={`Help us build the future of community-driven publishing at ${SITE_CONFIG.name}.`}
+      description={`Thank you for your interest in joining ${SITE_CONFIG.name}.`}
       actions={
         <Button asChild>
-          <Link href="/contact">Apply Now</Link>
+          <Link href="/contact">Send Your CV</Link>
         </Button>
       }
     >
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-4">
-          {roles.map((role) => (
-            <Card key={role.title} className="border-border bg-card">
-              <CardContent className="p-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="secondary">{role.level}</Badge>
-                  <Badge variant="outline">{role.type}</Badge>
-                </div>
-                <h2 className="mt-3 text-lg font-semibold text-foreground">{role.title}</h2>
-                <p className="mt-1 text-sm text-muted-foreground">{role.location}</p>
-                <Button variant="outline" className="mt-4" asChild>
-                  <Link href="/contact">View Role</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+      <div className="grid gap-6">
         <Card className="border-border bg-card">
           <CardContent className="p-6">
-            <h3 className="text-lg font-semibold text-foreground">Why {SITE_CONFIG.name}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              We are building a product that helps people discover and share the best knowledge on the web.
+            <Badge variant="secondary">Hiring Update</Badge>
+            <h2 className="mt-3 text-xl font-semibold text-foreground">We are not hiring at the moment</h2>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              We do not have any open roles currently. If you would like to be considered for future opportunities,
+              please send your CV through our Contact page.
             </p>
-            <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {benefits.map((benefit) => (
-                <div key={benefit} className="rounded-md border border-border bg-secondary/40 px-3 py-2">
-                  {benefit}
-                </div>
-              ))}
-            </div>
+            <Button className="mt-5" asChild>
+              <Link href="/contact">Go to Contact Page</Link>
+            </Button>
           </CardContent>
         </Card>
       </div>

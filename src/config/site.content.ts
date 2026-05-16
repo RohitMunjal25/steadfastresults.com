@@ -2,7 +2,6 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent reading platform',
   },
   footer: {
     tagline: 'Stories, resources, and discoverable posts',

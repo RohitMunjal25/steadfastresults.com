@@ -280,7 +280,7 @@ function EditorialHome({ primaryTask, articlePosts, supportTasks }: { primaryTas
           <div>
             <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] ${tone.badge}`}>
               <FileText className="h-3.5 w-3.5" />
-              Reading-first publication
+
             </span>
             <h1 className={`mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.06em] sm:text-6xl ${tone.title}`}>
               Essays, analysis, and slower reading designed like a publication, not a dashboard.

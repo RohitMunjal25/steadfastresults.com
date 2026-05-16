@@ -1,9 +1,14 @@
+'use client'
+
 import Link from 'next/link'
+import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Bookmark, Building2, FileText, Image as ImageIcon, Sparkles } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { getProductKind } from '@/design/factory/get-product-kind'
+import { useAuth } from '@/lib/auth-context'
 import { LOGIN_PAGE_OVERRIDE_ENABLED, LoginPageOverride } from '@/overrides/login-page'
 
 function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
@@ -27,8 +32,8 @@ function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
       muted: 'text-[#6e5547]',
       action: 'bg-[#241711] text-[#fff1e2] hover:bg-[#3a241b]',
       icon: FileText,
-      title: 'Sign in to your publication workspace',
-      body: 'Draft, review, and publish long-form work with the calmer reading system intact.',
+      title: 'Sign in to your editorial desk',
+      body: 'Continue writing, editing, and publishing articles in a focused newsroom-style workspace.',
     }
   }
   if (kind === 'visual') {
@@ -64,6 +69,28 @@ export default function LoginPage() {
   const productKind = getProductKind(recipe)
   const config = getLoginConfig(productKind)
   const Icon = config.icon
+  const router = useRouter()
+  const { login, isLoading } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setError('')
+
+    if (!email.trim() || !password) {
+      setError('Please enter your email and password.')
+      return
+    }
+
+    try {
+      await login(email.trim(), password)
+      router.push('/')
+    } catch {
+      setError('Unable to sign in right now. Please try again.')
+    }
+  }
 
   return (
     <div className={`min-h-screen ${config.shell}`}>
@@ -75,24 +102,41 @@ export default function LoginPage() {
             <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em]">{config.title}</h1>
             <p className={`mt-5 text-sm leading-8 ${config.muted}`}>{config.body}</p>
             <div className="mt-8 grid gap-4">
-              {['Cleaner product-specific workflows', 'Palette and layout matched to the site family', 'Fewer repeated admin patterns'].map((item) => (
+              {['Write and manage articles in one place', 'Track drafts, edits, and published stories', 'Keep your publishing flow simple and focused'].map((item) => (
                 <div key={item} className="rounded-[1.5rem] border border-current/10 px-4 py-4 text-sm">{item}</div>
               ))}
             </div>
           </div>
 
           <div className={`rounded-[2rem] p-8 ${config.panel}`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Welcome back</p>
-            <form className="mt-6 grid gap-4">
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Password" type="password" />
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${config.action}`}>Sign in</button>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Article Login</p>
+            <form className="mt-6 grid gap-4" onSubmit={onSubmit}>
+              <input
+                className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm"
+                placeholder="Email address"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                type="email"
+                autoComplete="email"
+              />
+              <input
+                className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm"
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+              />
+              {error ? <p className="text-sm text-red-600">{error}</p> : null}
+              <button type="submit" disabled={isLoading} className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${config.action} disabled:opacity-60`}>
+                {isLoading ? 'Signing in...' : 'Sign in'}
+              </button>
             </form>
             <div className={`mt-6 flex items-center justify-between text-sm ${config.muted}`}>
-              <Link href="/forgot-password" className="hover:underline">Forgot password?</Link>
+              <Link href="/forgot-password" className="hover:underline">Forgot your password?</Link>
               <Link href="/register" className="inline-flex items-center gap-2 font-semibold hover:underline">
                 <Sparkles className="h-4 w-4" />
-                Create account
+                Create writer account
               </Link>
             </div>
           </div>
